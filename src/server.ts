@@ -1,4 +1,5 @@
 import express from 'express';
+import {Request, Response} from 'express';
 import bodyParser from 'body-parser';
 require('dotenv').config();
 import {filterImageFromURL, deleteLocalFiles, isValidImage} from './util/util';
@@ -15,9 +16,9 @@ import {filterImageFromURL, deleteLocalFiles, isValidImage} from './util/util';
   app.use(bodyParser.json());
 
   // Created endpoint to filter an image from a public url.
-  app.get("/filteredimage", async (req, res) => {
+  app.get("/filteredimage", async (req: Request, res: Response) => {
     try {
-      let { image_url } = req.query;
+      let { image_url } :{image_url:string} = req.query
 
       if (!image_url) {
         return res.status(400)
